@@ -7,6 +7,7 @@ public class Main {
 
     public static void main(String[] args) {
         List<Archetypes> heroList = new ArrayList<Archetypes>();
+        List<String> historicalFight = new ArrayList<String>();
 
 
 
@@ -25,16 +26,14 @@ public class Main {
                     System.out.println("2 : List of hero");
                     System.out.println("3 : Hero fight");
                     System.out.println("4 : Delete a Hero");
-                    System.out.println("5 : Leave");
+                    System.out.println("5 : Fight Historical");
+                    System.out.println("6 : Leave");
                     choiceInt = sc.nextInt();
                     choiceDone = true;
                 } catch (InputMismatchException e) {
                     System.out.println("Please choose an integer");
                     sc.next();
                 }
-            }
-            if (choiceInt == 5){
-                gameRunning = false;
             }
 
             if(choiceInt == 1){
@@ -46,11 +45,17 @@ public class Main {
             }
 
             if (choiceInt == 3){
-                choiceFunctions.choice3(heroList);
+                choiceFunctions.choice3(heroList, historicalFight);
             }
 
             if (choiceInt == 4){
                 heroList = choiceFunctions.choice4(heroList);
+            }
+            if (choiceInt == 5){
+                choiceFunctions.choice5(historicalFight);
+            }
+            if (choiceInt == 6){
+                gameRunning = false;
             }
 
         }

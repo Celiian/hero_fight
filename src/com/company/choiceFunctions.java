@@ -84,7 +84,7 @@ public class choiceFunctions {
         }
     }
 
-    public static void choice3(List<Archetypes> heroList) {
+    public static void choice3(List<Archetypes> heroList, List<String> historicalFight) {
         int choiceFirstHero = 0;
         int choiceSecondHero = 0;
 
@@ -140,12 +140,14 @@ public class choiceFunctions {
 
             if (hero1Hp <= 0){
                 System.out.println(hero1.getName() + " lost the fight !!");
-                fightEnded = true;
+                String historicalWin = (hero2.getName() + " à tué " + hero1.getName() + " en " + i + " tours");
+                historicalFight.add(historicalWin);
                 break;
             }
             if (hero2Hp <= 0){
                 System.out.println(hero2.getName() + " lost the fight !!");
-                fightEnded = true;
+                String historicalWin = (hero1.getName() + " à tué " + hero2.getName() + " en " + i + " tours");
+                historicalFight.add(historicalWin);
                 break;
             }
 
@@ -241,5 +243,17 @@ public class choiceFunctions {
             }
         }
         return heroList;
+    }
+
+    public static void choice5(List<String> historicalFight) {
+        if(historicalFight.size() != 0) {
+            for (int i = 0; i < historicalFight.size(); i++) {
+                System.out.println(historicalFight.get(i));
+            }
+        }
+        else{
+            System.out.println("The fight Historical is empty... Please start a fight");
+        }
+        System.out.println("");
     }
 }
