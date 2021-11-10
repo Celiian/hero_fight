@@ -9,6 +9,21 @@ public class GameFunctions {
     static Scanner sc = new Scanner(System.in);
 
 
+    public static int fight(Archetypes hero_atk, Archetypes hero_def, int hero2Hp, int i){
+        int dmg_done = hero_atk.damageDone(i);
+        int dmg_taken = hero_def.takenDamage(dmg_done);
+        hero2Hp = (hero2Hp - dmg_taken);
+
+        if (hero2Hp < 0){
+            hero2Hp = 0;
+        }
+        System.out.println(hero_atk.getName() + " did " + dmg_taken + " to " + hero_def.getName() + " !");
+        System.out.println("Now " +  hero_def.getName() + " have " + hero2Hp + " hp left");
+
+        return hero2Hp;
+    }
+
+
     public static Archetypes characterBaseCreate(){
         int choiceInt = 0;
         boolean choiceDone;
@@ -89,21 +104,11 @@ public class GameFunctions {
             System.out.println("Your Hero now have : " + atk + " atk / " + hp + " hp / " + speed + " speed");
         }
 
-        Archetypes hero = new Archetypes(name, atk, hp, speed);
+        Neutral hero = new Neutral(name, atk, hp, speed);
         return hero;
     }
 
-    public static Archetypes fight(Archetypes hero_atk, Archetypes hero_def){
-        int dmg_done = hero_atk.getDamage();
-        hero_def.setHp(hero_def.getHp() - dmg_done);
-        if (hero_def.getHp() < 0){
-            hero_def.setHp(0);
-        }
-        System.out.println(hero_atk.getName() + " did " + hero_atk.getDamage() + " to " + hero_def.getName() + " !");
-        System.out.println("Now " +  hero_def.getName() + " have " + hero_def.getHp() + " hp left");
 
-        return hero_def;
-    }
 
     public static Warrior characterWarriorCreate(){
         int choiceInt = 0;
@@ -114,7 +119,7 @@ public class GameFunctions {
         int hp = 100;
         int speed = 30;
         int shield = 5;
-        System.out.println("Your Hero have : " + atk + " atk / " + hp + " hp / " + speed + " speed" + shield + " shield");
+        System.out.println("Your Hero have : " + atk + " atk / " + hp + " hp / " + speed + " speed / " + shield + " shield");
 
         String choiceStr = "n";
         try{

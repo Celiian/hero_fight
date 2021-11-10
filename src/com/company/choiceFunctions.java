@@ -14,7 +14,7 @@ public class choiceFunctions {
         boolean validOption = false;
         while (!validOption){
             try {
-                System.out.println("Please choose a archetype : 1.Default | 2.Warrior | 3.Wizard | 4.Thief");
+                System.out.println("Please choose a archetype : 1 : Default | 2 : Warrior | 3 : Wizard | 4 : Thief");
                 choiceArc = sc.nextInt();
                 validOption = true;
             } catch (InputMismatchException e) {
@@ -124,33 +124,40 @@ public class choiceFunctions {
         Archetypes firstHero = heroList.get(choiceFirstHero);
         Archetypes secondHero = heroList.get(choiceSecondHero);
         Archetypes hero1 = firstHero;
+        int hero1Hp = hero1.getHp();
         Archetypes hero2 = secondHero;
+        int hero2Hp = hero2.getHp();
         Archetypes hero3;
+        int hero3Hp;
 
         if(firstHero.getSpeed() < secondHero.getSpeed()) {
             hero1 = secondHero;
             hero2 = firstHero;
         }
 
-
+        int i = 0;
         while (!fightEnded) {
-            if (hero1.getHp() <= 0){
+
+            if (hero1Hp <= 0){
                 System.out.println(hero1.getName() + " lost the fight !!");
                 fightEnded = true;
                 break;
             }
-            if (hero2.getHp() <= 0){
+            if (hero2Hp <= 0){
                 System.out.println(hero2.getName() + " lost the fight !!");
                 fightEnded = true;
                 break;
             }
 
-            hero2 = GameFunctions.fight(hero1, hero2);
+            hero2Hp = GameFunctions.fight(hero1, hero2, hero2Hp, i);
 
             hero3 = hero1;
+            hero3Hp = hero1Hp;
             hero1 = hero2;
+            hero1Hp = hero2Hp;
             hero2 = hero3;
-
+            hero2Hp = hero3Hp;
+            i ++;
         }
     }
 
