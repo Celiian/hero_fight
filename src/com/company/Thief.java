@@ -94,7 +94,7 @@ public class Thief implements Archetypes{
 
 
     public int damageDone(int i) {
-        if(i == 0){
+        if(i > 1){
             this.crit = false;
         }
         int damageDone = this.damage;

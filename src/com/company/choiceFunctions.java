@@ -1,8 +1,6 @@
 package com.company;
 
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class choiceFunctions {
 
@@ -255,5 +253,81 @@ public class choiceFunctions {
             System.out.println("The fight Historical is empty... Please start a fight");
         }
         System.out.println("");
+    }
+
+    public static List<Archetypes> choice7(List<String> lineList, List<Archetypes> heroList) {
+        Map<Integer, Map<String, String>> heroTab = new HashMap<>();
+
+
+        lineList = file.file();
+        int a =0;
+        for(int i = 0; i<lineList.size(); i ++){
+            heroTab = file.read(lineList.get(i), heroTab, a);
+            a++;
+        }
+        System.out.println(heroTab);
+
+        int y = 0;
+        String name = "";
+        int atk = 10;
+        int hp = 100;
+        int speed = 30;
+        int dodge = 30;
+        int crit = 30;
+        int mana = 20;
+        int shield = 5;
+        for (Map.Entry m : heroTab.entrySet()) {
+            Map<String, String> dict = heroTab.get(y);
+            y++;
+            for (Map.Entry n : dict.entrySet()) {
+                String key = String.valueOf(n.getKey());
+                String value = String.valueOf(n.getValue());
+                ArrayList<String> liste = new ArrayList<String>();
+                liste = file.separator(String.valueOf(n));
+                    if (liste.get(0).equals("name")) {
+                        name = liste.get(1);
+                    }
+                    if (liste.get(0).equals("hp")) {
+                        hp = Integer.parseInt(liste.get(1));
+                    }
+                    if (m.getKey().equals("atk")) {
+                        atk = (int) m.getValue();
+                    }
+                    if (m.getKey().equals("speed")) {
+                        speed = (int) m.getValue();
+                    }
+                    if (m.getKey().equals("dodge")) {
+                        dodge = (int) m.getValue();
+                    }
+                    if (m.getKey().equals("crit")) {
+                        crit = (int) m.getValue();
+                    }
+                    if (m.getKey().equals("mana")) {
+                        mana = (int) m.getValue();
+                    }
+                    if (m.getKey().equals("shield")) {
+                        shield = (int) m.getValue();
+                    }
+                    if (key.equals("class")) {
+                        if (value.equals("thief")) {
+                            Thief thief = new Thief(name, atk, hp, speed, dodge, crit);
+                            heroList.add(thief);
+                        }
+                        if (value.equals("warrior")) {
+                            Warrior warrior = new Warrior(name, atk, hp, speed, shield);
+                            heroList.add(warrior);
+                        }
+                        if (value.equals("wizard")) {
+                            Wizard wizard = new Wizard(name, atk, hp, speed, mana);
+                            heroList.add(wizard);
+                        }
+                        if (value.equals("neutral")) {
+                            Neutral hero = new Neutral(name, atk, hp, speed);
+                            heroList.add(hero);
+                        }
+                    }
+                }
+        }
+        return heroList;
     }
 }

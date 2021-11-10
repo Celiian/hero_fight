@@ -9,7 +9,7 @@ public class Warrior implements Archetypes {
     protected int hp;
     protected int speed;
 
-    public Warrior(int shield, String name, int damage, int hp, int speed) {
+    public Warrior(String name, int damage, int hp, int speed, int shield) {
         this.shield = shield;
         this.name = name;
         this.damage = damage;
@@ -17,9 +17,6 @@ public class Warrior implements Archetypes {
         this.speed = speed;
     }
 
-    public Warrior(String name, int damage, int hp, int speed, int shield) {
-        this.shield = shield;
-    }
 
     public int getShield() {
         return shield;

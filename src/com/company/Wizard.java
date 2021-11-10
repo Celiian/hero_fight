@@ -74,7 +74,7 @@ public class Wizard implements Archetypes {
 
     @Override
     public int damageDone(int i) {
-        if (i == 0){
+        if (i > 1){
             wizardDamageModified = wizardDamage;
         }
         int damageDone = this.damage + wizardDamageModified;
