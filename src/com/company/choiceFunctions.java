@@ -10,12 +10,29 @@ public class choiceFunctions {
 
     public static List<Archetypes> choice1(int choiceInt, boolean choiceDone, List<Archetypes> heroList){
 
+        int choiceArc = 0;
+        boolean validOption = false;
+        while (!validOption){
+            try {
+                System.out.println("Please choose a archetype : 1.Default | 2.Warrior | 3.Wizard | 4.Thief");
+                choiceArc = sc.nextInt();
+                validOption = true;
+            } catch (InputMismatchException e) {
+                System.out.println("Please enter a valid option");
+                sc.next();
+            }
+        }
 
-        Archetypes hero = GameFunctions.characterBaseCreate();
+        if (choiceArc == 1){
+            heroList.add(GameFunctions.characterBaseCreate());
+        } else if (choiceArc == 2){
+            heroList.add(GameFunctions.characterWarriorCreate());
+        } else if (choiceArc == 3){
+            heroList.add(GameFunctions.characterWizardCreate());
+        } else if (choiceArc == 4){
+            heroList.add(GameFunctions.characterThiefCreate());}
 
 
-
-        heroList.add(hero);
         return heroList;
     }
 

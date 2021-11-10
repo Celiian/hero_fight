@@ -20,7 +20,6 @@ public class Main {
             boolean choiceDone = false;
             while (!choiceDone) {
                 try {
-                    System.out.println("Let the game Game start !!");
                     System.out.println("What do you want to do ?");
                     System.out.println("1 : Create a hero");
                     System.out.println("2 : List of hero");
@@ -53,10 +52,6 @@ public class Main {
             if (choiceInt == 4){
                 heroList = choiceFunctions.choice4(heroList);
             }
-
-
-
-
 
         }
         System.out.println("Application has ended");

@@ -1,29 +1,29 @@
 package com.company;
 
 public class Thief extends Archetypes{
-    protected boolean dodge;
-    protected int critalDommage;
+    protected int dodge;
+    protected int critical;
 
-    public Thief(String name, int damage, int hp, int speed) {
+    public Thief(String name, int damage, int hp, int speed, int dodge, int critical) {
         super(name, damage, hp, speed);
         this.dodge = dodge;
-        this.critalDommage = critalDommage;
+        this.critical = critical;
     }
 
-    public boolean isDodge() {
+    public int isDodge() {
         return dodge;
     }
 
-    public int getCritalDommage() {
-        return critalDommage;
+    public int getCritical() {
+        return critical;
     }
 
-    public void setDodge(boolean dodge) {
+    public void setDodge(int dodge) {
         this.dodge = dodge;
     }
 
-    public void setCritalDommage(int critalDommage) {
-        this.critalDommage = critalDommage;
+    public void setCritical(int critical) {
+        this.critical = critical;
     }
 
     @Override
@@ -48,6 +48,6 @@ public class Thief extends Archetypes{
 
     @Override
     public String toString() {
-        return "Hero " + name + " :  Atk = " + damage + "/ Hp = " + hp + "/ Speed = " + speed;
+        return "Hero " + name + " :  Atk = " + damage + "/ Hp = " + hp + "/ Speed = " + speed + "/ Critical  = " + critical + "/ Dodge  = " + dodge;
     }
 }
