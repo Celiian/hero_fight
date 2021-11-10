@@ -25,7 +25,7 @@ public class Main {
                     System.out.println("1 : Create a hero");
                     System.out.println("2 : List of hero");
                     System.out.println("3 : Hero fight");
-                    //System.out.println("4 : Delete a Hero");
+                    System.out.println("4 : Delete a Hero");
                     System.out.println("5 : Leave");
                     choiceInt = sc.nextInt();
                     choiceDone = true;
@@ -48,6 +48,10 @@ public class Main {
 
             if (choiceInt == 3){
                 choiceFunctions.choice3(heroList);
+            }
+
+            if (choiceInt == 4){
+                heroList = choiceFunctions.choice4(heroList);
             }
 
 

@@ -2,7 +2,6 @@ package com.company;
 
 import java.util.InputMismatchException;
 import java.util.List;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class choiceFunctions {
@@ -11,89 +10,20 @@ public class choiceFunctions {
 
     public static List<Archetypes> choice1(int choiceInt, boolean choiceDone, List<Archetypes> heroList){
 
-        System.out.println("Please choose a Hero name");
-        String name = sc.next();
-        int atk = 10;
-        int hp = 100;
-        int speed = 30;
-        System.out.println("Your Hero have : " + atk + " atk / " + hp + " hp / " + speed + " speed");
 
-        String choiceStr = "n";
-        try{
-            System.out.println("Do you want to change a stat of your hero ? (y / n)");
-            choiceStr = sc.next();
-        }
-        catch (InputMismatchException e){
-            System.out.println("Please enter a valid option");
-            sc.next();
-        }
-        if (Objects.equals(choiceStr, "y")){
-            choiceDone = false;
-            while(!choiceDone) {
+        Archetypes hero = GameFunctions.characterBaseCreate();
 
-                try{
-                    System.out.println("Which Stat do you want to change ? ( atk / hp / speed / none )");
-                    choiceStr = sc.next();
-                }
-                catch (InputMismatchException e){
-                    System.out.println("Please enter a valid option");
-                    sc.next();
-                }
-                if (choiceStr.equals("atk")) {
-                    try {
-                        System.out.println("Please enter the new value");
-                        choiceInt = sc.nextInt();
-                        atk = choiceInt;
-                        System.out.println("Your Hero now have : " + atk + " atk");
 
-                    }
-                    catch (InputMismatchException e){
-                        System.out.println("Please enter a valid option");
-                        sc.next();
-                    }
 
-                } else if (choiceStr.equals("hp")) {
-                    try {
-                        System.out.println("Please enter the new value");
-                        choiceInt = sc.nextInt();
-                        hp = choiceInt;
-                        System.out.println("Your Hero now have : " + hp + " hp");
-
-                    }
-                    catch (InputMismatchException e){
-                        System.out.println("Please enter a valid option");
-                        sc.next();
-                    }
-
-                } else if (choiceStr.equals("speed")) {
-                    try {
-                        System.out.println("Please enter the new value");
-                        choiceInt = sc.nextInt();
-                        speed = choiceInt;
-                        System.out.println("Your Hero now have : " + speed + " speed");
-
-                    }
-                    catch (InputMismatchException e){
-                        System.out.println("Please enter a valid option");
-                        sc.next();
-                    }
-
-                } else if (choiceStr.equals("none")) {
-                    choiceDone = true;
-                }
-                else {
-                    System.out.println("Please choose a valid option");
-                }
-            }
-            System.out.println("Your Hero now have : " + atk + " atk / " + hp + " hp / " + speed + " speed");
-        }
-
-        Archetypes hero = GameFunctions.characterBaseCreate(name, atk, hp, speed);
         heroList.add(hero);
         return heroList;
     }
 
     public static void choice2(int choiceInt, boolean choiceDone, List<Archetypes> heroList){
+        if (heroList.size() == 0){
+            System.out.println("There isn't any Hero yet... You need to create some");
+            return;
+        }
         for(int i = 0; i < heroList.size() ; i++) {
             System.out.println(i + " - " + heroList.get(i).getName());
         }
@@ -150,7 +80,7 @@ public class choiceFunctions {
             System.out.println("Which Hero do you want to fight ( choose the first one)");
             choiceFirstHero = sc.nextInt();
             if (choiceFirstHero < heroList.size()) {
-                System.out.println("You choosed " + heroList.get(choiceFirstHero).getName() + " as first hero");
+                System.out.println("You have chosen " + heroList.get(choiceFirstHero).getName() + " as first hero");
             } else {
                 System.out.println("Please choose a valid hero");
             }
@@ -163,7 +93,7 @@ public class choiceFunctions {
             System.out.println("Which Hero do you want to fight ( choose the second one)");
             choiceSecondHero = sc.nextInt();
             if (choiceSecondHero < heroList.size()) {
-                System.out.println("You choosed " + heroList.get(choiceSecondHero).getName() + " as second hero");
+                System.out.println("You have chosen " + heroList.get(choiceSecondHero).getName() + " as second hero");
             } else {
                 System.out.println("Please choose a valid hero");
             }
@@ -205,5 +135,87 @@ public class choiceFunctions {
             hero2 = hero3;
 
         }
+    }
+
+    public static List<Archetypes> choice4(List<Archetypes> heroList) {
+        String choiceStr = "n";
+        int choiceInt = 0;
+        boolean choiceDone = false;
+        if (heroList.size() == 0){
+            System.out.println("There isn't any Hero yet... You need to create some");
+            return heroList;
+        }
+        for(int i = 0; i < heroList.size() ; i++) {
+            System.out.println(i + " - " + heroList.get(i).getName());
+        }
+        try {
+            System.out.println("Which Hero do you want to delete ?");
+            choiceInt = sc.nextInt();
+            if (choiceInt < heroList.size()) {
+                System.out.println("You have deleted " + heroList.get(choiceInt).getName());
+                heroList.remove(heroList.get(choiceInt));
+                for(int i = 0; i < heroList.size() ; i++) {
+                    System.out.println(i + " - " + heroList.get(i).getName());
+                }
+            } else {
+                System.out.println("Please choose a valid hero");
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("Please enter a valid option");
+            sc.next();
+        }
+        try {
+            System.out.println("Do you want to delete an other Hero ? (y / n )");
+            choiceStr = sc.next();
+        }
+        catch (InputMismatchException e){
+            System.out.println("Please enter a valid option");
+            sc.next();
+        }
+
+        if (choiceStr.equals("y")) {
+            if (heroList.size() == 0){
+                System.out.println("There isn't any Hero yet... You need to create some");
+                return heroList;
+            }
+
+            for(int i = 0; i < heroList.size() ; i++) {
+                System.out.println(i + " - " + heroList.get(i).getName());
+            }
+            while (!choiceDone) {
+                if (heroList.size() == 0){
+                    System.out.println("There isn't any Hero yet... You need to create some");
+                    return heroList;
+                }
+                try {
+                    System.out.println("Which Hero do you want to delete ?");
+                    choiceInt = sc.nextInt();
+                    if (choiceInt < heroList.size()) {
+                        System.out.println("You have deleted " + heroList.get(choiceInt).getName());
+                        heroList.remove(heroList.get(choiceInt));
+                        for(int i = 0; i < heroList.size() ; i++) {
+                            System.out.println(i + " - " + heroList.get(i).getName());
+                        }
+                    } else {
+                        System.out.println("Please choose a valid hero");
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println("Please enter a valid option");
+                    sc.next();
+                }
+                try {
+                    System.out.println("Do you want to delete an other Hero ? (y / n )");
+                    choiceStr = sc.next();
+                }
+                catch (InputMismatchException e){
+                    System.out.println("Please enter a valid option");
+                    sc.next();
+                }
+                if (choiceStr.equals(("n"))){
+                    choiceDone = true;
+                }
+            }
+        }
+        return heroList;
     }
 }
