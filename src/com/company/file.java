@@ -45,7 +45,6 @@ public class file {
             liste.add(mots[i]);
         }
 
-        System.out.println(liste);
 
         for(int x = 0; x < liste.size(); x++){
             String[] mot = liste.get(x).split(SEPARATOR2);
@@ -56,7 +55,6 @@ public class file {
 
 
         heroTab.put(y, hero);
-        System.out.println(heroTab);
         return heroTab;
     }
 

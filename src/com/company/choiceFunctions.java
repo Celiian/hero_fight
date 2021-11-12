@@ -36,11 +36,11 @@ public class choiceFunctions {
 
     public static void choice2(int choiceInt, boolean choiceDone, List<Archetypes> heroList){
         if (heroList.size() == 0){
-            System.out.println("There isn't any Hero yet... You need to create some");
+            System.out.println("There isn't any Hero yet... You need to create some \n");
             return;
         }
         for(int i = 0; i < heroList.size() ; i++) {
-            System.out.println(i + " - " + heroList.get(i).getName());
+            System.out.println(i+1 + " - " + heroList.get(i).getName());
         }
         String choiceStr = "n";
         try{
@@ -59,7 +59,7 @@ public class choiceFunctions {
                     System.out.println("Please choose a hero");
                     choiceInt = sc.nextInt();
                     if (choiceInt < heroList.size()) {
-                        System.out.println(heroList.get(choiceInt));
+                        System.out.println(heroList.get(choiceInt -1));
                     } else {
                         System.out.println("Please choose a valid hero");
                     }
@@ -85,39 +85,67 @@ public class choiceFunctions {
     public static void choice3(List<Archetypes> heroList, List<String> historicalFight) {
         int choiceFirstHero = 0;
         int choiceSecondHero = 0;
-
-
-        for (int i = 0; i < heroList.size(); i++) {
-            System.out.println(i + " - " + heroList.get(i).getName());
+        String choice = "";
+        if (heroList.size() < 2){
+            System.out.println("You don't have enough heroes to start a fight ! Please create some... \n");
+            return;
         }
-
-        try {
-            System.out.println("Which Hero do you want to fight ( choose the first one)");
-            choiceFirstHero = sc.nextInt();
-            if (choiceFirstHero < heroList.size()) {
-                System.out.println("You have chosen " + heroList.get(choiceFirstHero).getName() + " as first hero");
-            } else {
-                System.out.println("Please choose a valid hero");
+        System.out.println("If you want to choose the heroes that will fight enter : choose / If you want random heroes to fight enter : random");
+        choice = sc.next();
+        if(choice.equals("choose")) {
+            for (int i = 0; i < heroList.size(); i++) {
+                System.out.println(i + 1 + " - " + heroList.get(i).getName());
             }
-        } catch (InputMismatchException e) {
-            System.out.println("Please enter a valid option");
-            sc.next();
 
-        }
-        try {
-            System.out.println("Which Hero do you want to fight ( choose the second one)");
-            choiceSecondHero = sc.nextInt();
-            if (choiceSecondHero < heroList.size()) {
-                System.out.println("You have chosen " + heroList.get(choiceSecondHero).getName() + " as second hero");
-            } else {
-                System.out.println("Please choose a valid hero");
+            try {
+                System.out.println("Which Hero do you want to fight ( choose the first one ) / If you want to cancel press 0");
+                choiceFirstHero = sc.nextInt();
+                if (choiceFirstHero == 0) {
+                    return;
+                } else if (choiceFirstHero - 1 < heroList.size()) {
+                    System.out.println("You have chosen " + heroList.get(choiceFirstHero - 1).getName() + " as first hero \n");
+                } else {
+                    System.out.println("Please choose a valid hero");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Please enter a valid option");
+                sc.next();
+
             }
-        } catch (InputMismatchException e) {
-            System.out.println("Please enter a valid option");
-            sc.next();
+            try {
+                System.out.println("Which Hero do you want to fight ( choose the second one) / If you want to cancel press 0");
+                choiceSecondHero = sc.nextInt();
+                if (choiceSecondHero == 0) {
+                    return;
+                } else if (choiceSecondHero - 1 < heroList.size()) {
+                    System.out.println("You have chosen " + heroList.get(choiceSecondHero - 1).getName() + " as second hero \n");
+                } else {
+                    System.out.println("Please choose a valid hero");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Please enter a valid option");
+                sc.next();
 
+            }
         }
+        else if(choice.equals("random")){
+            while( true) {
+                double randNumber = Math.random();
+                choiceFirstHero = (int) (randNumber * heroList.size());
+                randNumber = Math.random();
+                choiceSecondHero = (int) (randNumber * heroList.size());
+                if (choiceFirstHero != choiceSecondHero) {
+                    break;
+                }
+            }
+        }
+
         boolean fightEnded = false;
+
+        if (choiceFirstHero == choiceSecondHero){
+            System.out.println("The hero fight his clone !! \n");
+        }
+
 
         Archetypes firstHero = heroList.get(choiceFirstHero);
         Archetypes secondHero = heroList.get(choiceSecondHero);
@@ -137,7 +165,7 @@ public class choiceFunctions {
         while (!fightEnded) {
             if (hero1Hp <= 0){
                 System.out.println(hero1.getName() + " lost the fight !!");
-                String historicalWin = (hero2.getName() + " à tué " + hero1.getName() + " en " + i + " tours");
+                String historicalWin = (hero2.getName() + " à tué " + hero1.getName() + " en " + (i/2) + " tours");
                 historicalFight.add(historicalWin);
                 break;
             }
@@ -254,7 +282,7 @@ public class choiceFunctions {
         System.out.println("");
     }
 
-    public static List<Archetypes> choice7(List<String> lineList, List<Archetypes> heroList) {
+    public static List<Archetypes> choice6(List<String> lineList, List<Archetypes> heroList) {
         Map<Integer, Map<String, String>> heroTab = new HashMap<>();
 
         lineList = file.file();
@@ -263,6 +291,7 @@ public class choiceFunctions {
             heroTab = file.read(lineList.get(i), heroTab, a);
             a++;
         }
+        int nbHero = 0;
         int y = 0;
         String name = "";
         int atk = 10;
@@ -308,22 +337,27 @@ public class choiceFunctions {
                         if (value.equals("thief")) {
                             Thief thief = new Thief(name, atk, hp, speed, dodge, crit);
                             heroList.add(thief);
+                            nbHero ++;
                         }
                         if (value.equals("warrior")) {
                             Warrior warrior = new Warrior(name, atk, hp, speed, shield);
                             heroList.add(warrior);
+                            nbHero ++;
                         }
                         if (value.equals("wizard")) {
                             Wizard wizard = new Wizard(name, atk, hp, speed, mana);
                             heroList.add(wizard);
+                            nbHero ++;
                         }
                         if (value.equals("neutral")) {
                             Neutral hero = new Neutral(name, atk, hp, speed);
                             heroList.add(hero);
+                            nbHero ++;
                         }
                     }
                 }
         }
+        System.out.println("You have imported " + nbHero + " heroes !" );
         return heroList;
     }
 }

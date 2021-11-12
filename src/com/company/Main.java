@@ -54,7 +54,7 @@ public class Main {
                 choiceFunctions.choice5(historicalFight);
             }
             if (choiceInt == 6){
-                heroList = choiceFunctions.choice7(lineList, heroList);
+                heroList = choiceFunctions.choice6(lineList, heroList);
             }
             if (choiceInt == 7){
                 gameRunning = false;
