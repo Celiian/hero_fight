@@ -1,5 +1,7 @@
 package com.company;
 
+import com.company.Class.*;
+
 import java.util.InputMismatchException;
 import java.util.Objects;
 import java.util.Scanner;
@@ -10,6 +12,9 @@ public class GameFunctions {
 
 
     public static int fight(Archetypes hero_atk, Archetypes hero_def, int hero2Hp, int i){
+        String effect_done = hero_atk.stateDone();
+        hero_def.stateTaken(effect_done);
+
         int dmg_done = hero_atk.damageDone(i);
         int dmg_taken = hero_def.takenDamage(dmg_done);
         hero2Hp = (hero2Hp - dmg_taken);
@@ -18,7 +23,7 @@ public class GameFunctions {
             hero2Hp = 0;
         }
         System.out.println(hero_atk.getName() + " did " + dmg_taken + " to " + hero_def.getName() + " !");
-        System.out.println("Now " +  hero_def.getName() + " have " + hero2Hp + " hp left");
+        System.out.println("Now " +  hero_def.getName() + " have " + hero2Hp + " hp left \n");
 
         return hero2Hp;
     }
@@ -417,5 +422,105 @@ public class GameFunctions {
         }
         Thief thief = new Thief(name, atk, hp, speed, critical, dodge);
         return thief;
+    }
+
+    public static Archetypes characterWitchCreate() {
+        int choiceInt = 0;
+        boolean choiceDone;
+        System.out.println("Please choose a Hero name");
+        String name = sc.next();
+        int atk = 10;
+        int hp = 100;
+        int speed = 30;
+        int effect = 30;
+        System.out.println("Your Hero have : " + atk + " atk / " + hp + " hp / " + speed + " speed /" + effect + " effect ( max : 100)");
+
+        String choiceStr = "n";
+        try{
+            System.out.println("Do you want to change a stat of your hero ? (y / n)");
+            choiceStr = sc.next();
+        }
+        catch (InputMismatchException e){
+            System.out.println("Please enter a valid option");
+            sc.next();
+        }
+        if (Objects.equals(choiceStr, "y")){
+            choiceDone = false;
+            while(!choiceDone) {
+
+                try{
+                    System.out.println("Which Stat do you want to change ? ( atk / hp / speed / effect /none )");
+                    choiceStr = sc.next();
+                }
+                catch (InputMismatchException e){
+                    System.out.println("Please enter a valid option");
+                    sc.next();
+                }
+                if (choiceStr.equals("atk")) {
+                    try {
+                        System.out.println("Please enter the new value");
+                        choiceInt = sc.nextInt();
+                        atk = choiceInt;
+                        System.out.println("Your Hero now have : " + atk + " atk");
+
+                    }
+                    catch (InputMismatchException e){
+                        System.out.println("Please enter a valid option");
+                        sc.next();
+                    }
+
+                } else if (choiceStr.equals("hp")) {
+                    try {
+                        System.out.println("Please enter the new value");
+                        choiceInt = sc.nextInt();
+                        hp = choiceInt;
+                        System.out.println("Your Hero now have : " + hp + " hp");
+
+                    }
+                    catch (InputMismatchException e){
+                        System.out.println("Please enter a valid option");
+                        sc.next();
+                    }
+
+                } else if (choiceStr.equals("speed")) {
+                    try {
+                        System.out.println("Please enter the new value");
+                        choiceInt = sc.nextInt();
+                        speed = choiceInt;
+                        System.out.println("Your Hero now have : " + speed + " speed");
+
+                    }
+                    catch (InputMismatchException e){
+                        System.out.println("Please enter a valid option");
+                        sc.next();
+                    }
+                }
+                else if (choiceStr.equals("effect")) {
+                    try {
+                        System.out.println("Please enter the new value");
+                        choiceInt = sc.nextInt();
+                        if (choiceInt > 100){
+                            choiceInt = 100;
+                        }
+                        effect = choiceInt;
+                        System.out.println("Your Hero now have : " + effect + " effect");
+
+                    }
+                    catch (InputMismatchException e){
+                        System.out.println("Please enter a valid option");
+                        sc.next();
+                    }
+                } else if (choiceStr.equals("none")) {
+                    choiceDone = true;
+                }
+                else {
+                    System.out.println("Please choose a valid option");
+                }
+            }
+            System.out.println("Your Hero have : " + atk + " atk / " + hp + " hp / " + speed + " speed /" + effect + " effect");
+        }
+
+        Witch witch = new Witch(name, atk, hp, speed, effect);
+        return witch;
     }
 }

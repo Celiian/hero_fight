@@ -1,5 +1,7 @@
 package com.company;
 
+import com.company.Class.Archetypes;
+
 import java.util.*;
 
 public class Main {

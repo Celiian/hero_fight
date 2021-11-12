@@ -1,4 +1,4 @@
-package com.company;
+package com.company.Class;
 
 public interface Archetypes {
 
@@ -22,6 +22,10 @@ public interface Archetypes {
     public int takenDamage(int damage);
 
     public int damageDone(int i);
+
+    public String stateDone();
+
+    public void stateTaken(String stateTaken);
 
 
 }

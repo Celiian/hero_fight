@@ -1,5 +1,7 @@
 package com.company;
 
+import com.company.Class.*;
+
 import java.util.*;
 
 public class choiceFunctions {
@@ -12,7 +14,7 @@ public class choiceFunctions {
         boolean validOption = false;
         while (!validOption){
             try {
-                System.out.println("Please choose a archetype : 1 : Default | 2 : Warrior | 3 : Wizard | 4 : Thief");
+                System.out.println("Please choose a archetype : 1 : Default | 2 : Warrior | 3 : Wizard | 4 : Thief | 5 : Witch");
                 choiceArc = sc.nextInt();
                 validOption = true;
             } catch (InputMismatchException e) {
@@ -28,7 +30,9 @@ public class choiceFunctions {
         } else if (choiceArc == 3){
             heroList.add(GameFunctions.characterWizardCreate());
         } else if (choiceArc == 4){
-            heroList.add(GameFunctions.characterThiefCreate());}
+            heroList.add(GameFunctions.characterThiefCreate());
+        } else if (choiceArc == 5){
+                heroList.add(GameFunctions.characterWitchCreate());}
 
 
         return heroList;
@@ -131,10 +135,16 @@ public class choiceFunctions {
         else if(choice.equals("random")){
             while( true) {
                 double randNumber = Math.random();
-                choiceFirstHero = (int) (randNumber * heroList.size());
+                choiceFirstHero = ((int) (randNumber * heroList.size())) + 1;
                 randNumber = Math.random();
-                choiceSecondHero = (int) (randNumber * heroList.size());
+                choiceSecondHero = ((int) (randNumber * heroList.size())) + 1;
                 if (choiceFirstHero != choiceSecondHero) {
+                    Archetypes firstHero = heroList.get(choiceFirstHero - 1);
+                    Archetypes secondHero = heroList.get(choiceSecondHero - 1);
+                    System.out.println("The first hero choosen is : " + firstHero.getName());
+                    System.out.println("The first hero choosen is : " + secondHero.getName());
+
+
                     break;
                 }
             }
@@ -147,8 +157,8 @@ public class choiceFunctions {
         }
 
 
-        Archetypes firstHero = heroList.get(choiceFirstHero);
-        Archetypes secondHero = heroList.get(choiceSecondHero);
+        Archetypes firstHero = heroList.get(choiceFirstHero - 1);
+        Archetypes secondHero = heroList.get(choiceSecondHero - 1);
         Archetypes hero1 = firstHero;
         int hero1Hp = hero1.getHp();
         Archetypes hero2 = secondHero;
@@ -301,7 +311,16 @@ public class choiceFunctions {
         int crit = 30;
         int mana = 20;
         int shield = 5;
+        int effect = 30;
         for (Map.Entry m : heroTab.entrySet()) {
+            atk = 10;
+            hp = 100;
+            speed = 30;
+            dodge = 30;
+            crit = 30;
+            mana = 20;
+            shield = 5;
+            effect = 30;
             Map<String, String> dict = heroTab.get(y);
             y++;
             for (Map.Entry n : dict.entrySet()) {
@@ -333,6 +352,9 @@ public class choiceFunctions {
                     if (liste.get(0).equals("shield")) {
                         shield = Integer.parseInt(liste.get(1));
                     }
+                    if (liste.get(0).equals("effect")) {
+                        effect = Integer.parseInt(liste.get(1));
+                    }
                     if (key.equals("class")) {
                         if (value.equals("thief")) {
                             Thief thief = new Thief(name, atk, hp, speed, dodge, crit);
@@ -352,6 +374,10 @@ public class choiceFunctions {
                         if (value.equals("neutral")) {
                             Neutral hero = new Neutral(name, atk, hp, speed);
                             heroList.add(hero);
+                            nbHero ++;
+                        }if (value.equals("witch")) {
+                            Witch witch = new Witch(name, atk, hp, speed, effect);
+                            heroList.add(witch);
                             nbHero ++;
                         }
                     }

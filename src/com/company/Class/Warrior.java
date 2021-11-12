@@ -1,6 +1,9 @@
-package com.company;
+package com.company.Class;
 
-import com.company.Archetypes;
+import com.company.Burn;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Warrior implements Archetypes {
     protected int shield;
@@ -8,6 +11,9 @@ public class Warrior implements Archetypes {
     protected int damage;
     protected int hp;
     protected int speed;
+    protected boolean sleep = false;
+    List<Burn> burnList = new ArrayList<Burn>();
+    protected int burnTurn = 0;
 
     public Warrior(String name, int damage, int hp, int speed, int shield) {
         this.shield = shield;
@@ -68,13 +74,50 @@ public class Warrior implements Archetypes {
 
     @Override
     public int takenDamage(int damage) {
+
+        int burnDamage = 0;
+        for (int i = 0; i < burnList.size(); i++) {
+            burnDamage +=3;
+            int bturn = burnList.get(i).burnTurn();
+            if (bturn == 5) {
+                burnList.remove(i);
+            }
+        }
+        if (burnList.size() != 0) {
+             System.out.println(this.name + " is burning !! he took " + burnDamage + " additional damages");
+             return damage + burnDamage;
+        }
         int damageTaken = damage - this.shield;
         return damageTaken;
     }
 
     @Override
     public int damageDone(int i) {
-        return damage;
+        if (!sleep){
+            return this.damage;
+        }
+        else {
+            System.out.println(this.name + " is sleeping ! He can't do any damage");
+            this.sleep = false;
+            return 0;
+        }
+    }
+
+    @Override
+    public String stateDone() {
+        return "";
+
+    }
+
+    @Override
+    public void stateTaken(String stateTaken) {
+        if (stateTaken.equals("burn")){
+            Burn burn = new Burn();
+            burnList.add(burn);
+        }
+        else if (stateTaken.equals("sleep")){
+            this.sleep = true;
+        }
     }
 
     @Override

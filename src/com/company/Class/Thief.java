@@ -1,6 +1,12 @@
-package com.company;
+package com.company.Class;
 
-public class Thief implements Archetypes{
+import com.company.Burn;
+import com.company.Class.Archetypes;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Thief implements Archetypes {
     protected int dodge;
     protected int critical;
     protected String name;
@@ -8,6 +14,9 @@ public class Thief implements Archetypes{
     protected int hp;
     protected int speed;
     private boolean crit = false;
+    protected boolean sleep = false;
+    List<Burn> burnList = new ArrayList<Burn>();
+    protected int burnTurn = 0;
 
 
     public Thief(String name, int damage, int hp, int speed, int dodge, int critical) {
@@ -88,31 +97,70 @@ public class Thief implements Archetypes{
         if (dodge < this.dodge){
             damagetaken = 0;
             System.out.println(this.name + " have dodged the attack !!");
+            return damagetaken;
         }
-        return damagetaken;
+
+        int burnDamage = 0;
+        for (int i = 0; i < burnList.size(); i++) {
+            burnDamage +=3;
+            int bturn = burnList.get(i).burnTurn();
+            if (bturn == 5) {
+                burnList.remove(i);
+            }
+        }
+        if (burnList.size() != 0) {
+            System.out.println(this.name + " is burning !! he took " + burnDamage + " additional damages");
+            return damage + burnDamage;
+        }
+        return damage;
+
     }
 
 
     public int damageDone(int i) {
-        if(i > 1){
-            this.crit = false;
-        }
-        int damageDone = this.damage;
-        if (!this.crit) {
-            double randNumber = Math.random();
-            double crit = randNumber * 100;
-            crit = (int) crit;
 
-            if (crit < this.critical) {
-                damageDone = this.damage * 2;
-                this.crit = true;
-                System.out.println(this.name + " have made a critical attack !!");
+        if (!sleep){
+            if(i > 1){
+                this.crit = false;
             }
+            int damageDone = this.damage;
+            if (!this.crit) {
+                double randNumber = Math.random();
+                double crit = randNumber * 100;
+                crit = (int) crit;
+
+                if (crit < this.critical) {
+                    damageDone = this.damage * 2;
+                    this.crit = true;
+                    System.out.println(this.name + " have made a critical attack !!");
+                }
+            }
+            else if (this.crit){
+                this.crit = false;
+            }
+            return damageDone;
         }
-        else if (this.crit){
-            this.crit = false;
+        else {
+            System.out.println(this.name + " is sleeping ! He can't do any damage");
+            this.sleep = false;
+            return 0;
         }
-        return damageDone;
+    }
+
+    @Override
+    public String stateDone() {
+        return "";
+    }
+
+    @Override
+    public void stateTaken(String stateTaken) {
+        if (stateTaken.equals("burn")){
+            Burn burn = new Burn();
+            burnList.add(burn);
+        }
+        else if (stateTaken.equals("sleep")){
+            this.sleep = true;
+        }
     }
 
     @Override
