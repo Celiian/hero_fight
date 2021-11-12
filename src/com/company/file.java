@@ -30,30 +30,33 @@ public class file {
 
     public static Map<Integer, Map<String, String>> read(String line, Map<Integer, Map<String, String>> heroTab, int y){
         Map<String, String> hero = new HashMap<String, String>();
+        ArrayList<String> liste = new ArrayList<String>();
 
 
         final String SEPARATOR1 = "-";
+        final String SEPARATOR2 = ":";
+
         String[] mots = line.split(SEPARATOR1);
 
         String mot1 = "";
         String mot2 = "";
 
-        for (int i = 0; i < mots.length; i += 2){
-            mot1 = mots[i];
-            mot2 = mots[i+1];
+        for (int i = 0; i < mots.length; i++){
+            liste.add(mots[i]);
         }
 
-        final String SEPARATOR = ":";
-        String[] mot = mot1.split(SEPARATOR);
-        for (int x = 0; x < mot.length; x += 2){
-            hero.put(mot[x], mot[x+1]);
+        System.out.println(liste);
+
+        for(int x = 0; x < liste.size(); x++){
+            String[] mot = liste.get(x).split(SEPARATOR2);
+            for (int z = 0; z < mot.length; z += 2){
+                hero.put(mot[z], mot[z+1]);
+            }
         }
 
-        mot = mot2.split(SEPARATOR);
-        for (int x = 0; x < mot.length; x += 2){
-            hero.put(mot[x], mot[x+1]);
-        }
+
         heroTab.put(y, hero);
+        System.out.println(heroTab);
         return heroTab;
     }
 
@@ -68,5 +71,4 @@ public class file {
         }
         return liste;
     }
-
 }

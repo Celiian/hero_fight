@@ -135,7 +135,6 @@ public class choiceFunctions {
 
         int i = 0;
         while (!fightEnded) {
-
             if (hero1Hp <= 0){
                 System.out.println(hero1.getName() + " lost the fight !!");
                 String historicalWin = (hero2.getName() + " à tué " + hero1.getName() + " en " + i + " tours");
@@ -144,7 +143,7 @@ public class choiceFunctions {
             }
             if (hero2Hp <= 0){
                 System.out.println(hero2.getName() + " lost the fight !!");
-                String historicalWin = (hero1.getName() + " à tué " + hero2.getName() + " en " + i + " tours");
+                String historicalWin = (hero1.getName() + " à tué " + hero2.getName() + " en " + (i/2) + " tours");
                 historicalFight.add(historicalWin);
                 break;
             }
@@ -258,15 +257,12 @@ public class choiceFunctions {
     public static List<Archetypes> choice7(List<String> lineList, List<Archetypes> heroList) {
         Map<Integer, Map<String, String>> heroTab = new HashMap<>();
 
-
         lineList = file.file();
         int a =0;
         for(int i = 0; i<lineList.size(); i ++){
             heroTab = file.read(lineList.get(i), heroTab, a);
             a++;
         }
-        System.out.println(heroTab);
-
         int y = 0;
         String name = "";
         int atk = 10;
@@ -290,23 +286,23 @@ public class choiceFunctions {
                     if (liste.get(0).equals("hp")) {
                         hp = Integer.parseInt(liste.get(1));
                     }
-                    if (m.getKey().equals("atk")) {
-                        atk = (int) m.getValue();
+                    if (liste.get(0).equals("atk")) {
+                        atk = Integer.parseInt(liste.get(1));
                     }
-                    if (m.getKey().equals("speed")) {
-                        speed = (int) m.getValue();
+                    if (liste.get(0).equals("speed")) {
+                        speed = Integer.parseInt(liste.get(1));
                     }
-                    if (m.getKey().equals("dodge")) {
-                        dodge = (int) m.getValue();
+                    if (liste.get(0).equals("dodge")) {
+                        dodge = Integer.parseInt(liste.get(1));
                     }
-                    if (m.getKey().equals("crit")) {
-                        crit = (int) m.getValue();
+                    if (liste.get(0).equals("critical")) {
+                        crit = Integer.parseInt(liste.get(1));
                     }
-                    if (m.getKey().equals("mana")) {
-                        mana = (int) m.getValue();
+                    if (liste.get(0).equals("mana")) {
+                        mana = Integer.parseInt(liste.get(1));
                     }
-                    if (m.getKey().equals("shield")) {
-                        shield = (int) m.getValue();
+                    if (liste.get(0).equals("shield")) {
+                        shield = Integer.parseInt(liste.get(1));
                     }
                     if (key.equals("class")) {
                         if (value.equals("thief")) {

@@ -198,7 +198,7 @@ public class GameFunctions {
                     System.out.println("Please choose a valid option");
                 }
             }
-            System.out.println("Your Hero now have : " + atk + " atk / " + hp + " hp / " + speed + " speed" + shield + " shield");
+            System.out.println("Your Hero now have : " + atk + " atk / " + hp + " hp / " + speed + " speed / " + shield + " shield");
         }
 
 

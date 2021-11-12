@@ -28,8 +28,8 @@ public class Main {
                     System.out.println("3 : Hero fight");
                     System.out.println("4 : Delete a Hero");
                     System.out.println("5 : Fight Historical");
-                    System.out.println("6 : Leave");
-                    System.out.println("7 : Config File");
+                    System.out.println("6 : Config File");
+                    System.out.println("7 : Leave");
 
                     choiceInt = sc.nextInt();
                     choiceDone = true;
@@ -38,19 +38,15 @@ public class Main {
                     sc.next();
                 }
             }
-
             if(choiceInt == 1){
                 heroList = choiceFunctions.choice1(choiceInt, choiceDone, heroList);
             }
-
             if (choiceInt == 2){
                 choiceFunctions.choice2(choiceInt, choiceDone, heroList);
             }
-
             if (choiceInt == 3){
                 choiceFunctions.choice3(heroList, historicalFight);
             }
-
             if (choiceInt == 4){
                 heroList = choiceFunctions.choice4(heroList);
             }
@@ -58,13 +54,11 @@ public class Main {
                 choiceFunctions.choice5(historicalFight);
             }
             if (choiceInt == 6){
-                gameRunning = false;
+                heroList = choiceFunctions.choice7(lineList, heroList);
             }
             if (choiceInt == 7){
-                heroList = choiceFunctions.choice7(lineList, heroList);
-
+                gameRunning = false;
             }
-
         }
         System.out.println("Application has ended");
     }
