@@ -23,6 +23,7 @@ public class choiceFunctions {
             }
         }
 
+        System.out.println("My creator was too lazy to let me talk during the heroes creation soo... you'll be alone.. Be brave ! (ノ_<、)");
         if (choiceArc == 1){
             heroList.add(GameFunctions.characterBaseCreate());
         } else if (choiceArc == 2){
@@ -35,12 +36,13 @@ public class choiceFunctions {
                 heroList.add(GameFunctions.characterWitchCreate());}
 
 
+        System.out.println("Yay You did it !! Wonderful !");
         return heroList;
     }
 
     public static void choice2(int choiceInt, boolean choiceDone, List<Archetypes> heroList){
         if (heroList.size() == 0){
-            System.out.println("There isn't any Hero yet... You need to create some \n");
+            System.out.println("٩(╬ʘ益ʘ╬)۶ ARE YOU STUPID !? You didn't create any hero yet YOU IDIOT... Go and create some before I get angry \n");
             return;
         }
         for(int i = 0; i < heroList.size() ; i++) {
@@ -48,11 +50,11 @@ public class choiceFunctions {
         }
         String choiceStr = "n";
         try{
-            System.out.println("Do you want to see the detailed stat of a hero ? (y / n)");
+            System.out.println("Do you want to see the detailed stat of a hero ? (y / n)  (×﹏×) Please don't I hate to do that ");
             choiceStr = sc.next();
         }
         catch (InputMismatchException e){
-            System.out.println("Please enter a valid option");
+            System.out.println("ヽ( `д´*)ノ Can you PLEASE enter a valid option");
             sc.next();
         }
 
@@ -60,15 +62,15 @@ public class choiceFunctions {
             choiceDone = false;
             while (!choiceDone) {
                 try {
-                    System.out.println("Please choose a hero");
+                    System.out.println("Please choose a hero ( ` ω ´ ) Didn't I told you that i hated that ??? ");
                     choiceInt = sc.nextInt();
                     if (choiceInt < heroList.size()) {
                         System.out.println(heroList.get(choiceInt -1));
                     } else {
-                        System.out.println("Please choose a valid hero");
+                        System.out.println("(╬`益´) could you CHOOSE a valid hero !?!?");
                     }
                 } catch (InputMismatchException e) {
-                    System.out.println("Please enter a valid option");
+                    System.out.println("ヽ( `д´*)ノ Can you PLEASE enter a valid option");
                     sc.next();
                 }
                 try{
@@ -76,7 +78,7 @@ public class choiceFunctions {
                     choiceStr = sc.next();
                 }
                 catch (InputMismatchException e){
-                    System.out.println("Please enter a valid option");
+                    System.out.println("ヽ( `д´*)ノ Can you PLEASE enter a valid option");
                     sc.next();
                 }
                 if (choiceStr.equals("n")){
@@ -86,15 +88,15 @@ public class choiceFunctions {
         }
     }
 
-    public static void choice3(List<Archetypes> heroList, List<String> historicalFight) {
+    public static void choice3(List<Archetypes> heroList, List<String> historicalFight) throws InterruptedException {
         int choiceFirstHero = 0;
         int choiceSecondHero = 0;
         String choice = "";
         if (heroList.size() < 2){
-            System.out.println("You don't have enough heroes to start a fight ! Please create some... \n");
+            System.out.println("٩(╬ʘ益ʘ╬)۶  You DON'T HAVE enough heroes to start a fight ! Please CREATE some... you idiot\n");
             return;
         }
-        System.out.println("If you want to choose the heroes that will fight enter : choose / If you want random heroes to fight enter : random");
+        System.out.println("If you want to choose the heroes that will fight enter : choose / If you want random heroes to fight enter : random ... Don't you DARE to enter ihategiuby");
         choice = sc.next();
         if(choice.equals("choose")) {
             for (int i = 0; i < heroList.size(); i++) {
@@ -149,11 +151,25 @@ public class choiceFunctions {
                 }
             }
         }
+        else if(choice.equals("ihategiuby")){
+            System.out.println("(◕‿◕)");
+            Thread.sleep(1000);
+            System.out.println("(`ー´)");
+            Thread.sleep(1000);
+            System.out.println("(╯°益°)╯彡┻━┻");
+            Thread.sleep(1000);
+            System.out.println("＼＼٩(๑`^´๑)۶／／ WHY DID YOU TYPE THAT !!!!????");
+            System.out.println("∩┐(◣_◢)┌∩┐ GO BACK NOW");
+            return;
+        }
+        else {
+            System.out.println("(ノ°益°)ノ Please enter a valid option !!!");
+        }
 
         boolean fightEnded = false;
 
         if (choiceFirstHero == choiceSecondHero){
-            System.out.println("The hero fight his clone !! \n");
+            System.out.println("The hero fight his twin !!  (ಡ‸ಡ) That's so sad \n");
         }
 
 
@@ -174,14 +190,14 @@ public class choiceFunctions {
         int i = 0;
         while (!fightEnded) {
             if (hero1Hp <= 0){
-                System.out.println(hero1.getName() + " lost the fight !!");
-                String historicalWin = (hero2.getName() + " à tué " + hero1.getName() + " en " + (i/2) + " tours");
+                System.out.println(hero1.getName() + " lost the fight !! (⁀ᗢ⁀) HEHE " + hero1.getName() + " YOU ABSOLUTE LOOSER");
+                String historicalWin = (hero2.getName() + " have killed " + hero1.getName() + " within " + (i/2) + " turn");
                 historicalFight.add(historicalWin);
                 break;
             }
             if (hero2Hp <= 0){
-                System.out.println(hero2.getName() + " lost the fight !!");
-                String historicalWin = (hero1.getName() + " à tué " + hero2.getName() + " en " + (i/2) + " tours");
+                System.out.println(hero2.getName() + " lost the fight !! (⁀ᗢ⁀) HEHE " + hero2.getName() + " YOU ABSOLUTE LOOSER");
+                String historicalWin = (hero1.getName() + " have killed " + hero2.getName() + " within " + (i/2) + " turn");
                 historicalFight.add(historicalWin);
                 break;
             }
@@ -203,73 +219,76 @@ public class choiceFunctions {
         int choiceInt = 0;
         boolean choiceDone = false;
         if (heroList.size() == 0){
-            System.out.println("There isn't any Hero yet... You need to create some");
+            System.out.println("There isn't any Hero yet... You need to create some.. Please hurry up so we can have fun destroying them ! (*¯ ³¯*)♡");
             return heroList;
         }
         for(int i = 0; i < heroList.size() ; i++) {
-            System.out.println(i + " - " + heroList.get(i).getName());
+        System.out.println(i+1 + " - " + heroList.get(i).getName());
         }
         try {
-            System.out.println("Which Hero do you want to delete ?");
+            System.out.println("Which Hero do you want to delete ? ♡( ◡‿◡ ) Choose with your heart... / Press 0 if you want to cancel (´-ω-`) Please don't");
             choiceInt = sc.nextInt();
-            if (choiceInt < heroList.size()) {
-                System.out.println("You have deleted " + heroList.get(choiceInt).getName());
+            if (choiceInt == 0){
+                return heroList;
+            }
+            if (choiceInt-1 < heroList.size()) {
+                System.out.println("You have deleted " + heroList.get(choiceInt-1).getName() + "(≧◡≦) ♡ That was so coooool !");
                 heroList.remove(heroList.get(choiceInt));
                 for(int i = 0; i < heroList.size() ; i++) {
                     System.out.println(i + " - " + heroList.get(i).getName());
                 }
             } else {
-                System.out.println("Please choose a valid hero");
+                System.out.println("Please choose a valid hero... Come ooon I'm sure you can do this ! here a motivation kiss (っ˘з(˘⌣˘ ) ♡");
             }
         } catch (InputMismatchException e) {
-            System.out.println("Please enter a valid option");
+            System.out.println("Please enter a valid option Come ooon I'm sure you can do this ! here a motivation kiss (っ˘з(˘⌣˘ ) ♡");
             sc.next();
         }
         try {
-            System.out.println("Do you want to delete an other Hero ? (y / n )");
+            System.out.println("Do you want to delete an other Hero ? (y / n ) (°◡°♡) Yaaaay please");
             choiceStr = sc.next();
         }
         catch (InputMismatchException e){
-            System.out.println("Please enter a valid option");
+            System.out.println("Please enter a valid option... Come ooon I'm sure you can do this ! here a motivation kiss (っ˘з(˘⌣˘ ) ♡");
             sc.next();
         }
 
         if (choiceStr.equals("y")) {
             if (heroList.size() == 0){
-                System.out.println("There isn't any Hero yet... You need to create some");
+                System.out.println("There isn't any Hero left... You need to create some.. Amazing you destroyed them all !! (◕‿◕)♡");
                 return heroList;
             }
 
             for(int i = 0; i < heroList.size() ; i++) {
-                System.out.println(i + " - " + heroList.get(i).getName());
+                System.out.println(i+1 + " - " + heroList.get(i).getName());
             }
             while (!choiceDone) {
                 if (heroList.size() == 0){
-                    System.out.println("There isn't any Hero yet... You need to create some");
+                    System.out.println("There isn't any Hero left... You need to create some .. Please hurry up so we can have fun destroying them ! (*¯ ³¯*)♡");
                     return heroList;
                 }
                 try {
-                    System.out.println("Which Hero do you want to delete ?");
-                    choiceInt = sc.nextInt();
+                    System.out.println("Which Hero do you want to delete ? (´｡• ᵕ •｡`) ♡ You're the best I know you can choose well !");
+                    choiceInt = sc.nextInt() - 1;
                     if (choiceInt < heroList.size()) {
-                        System.out.println("You have deleted " + heroList.get(choiceInt).getName());
+                        System.out.println("You have deleted " + heroList.get(choiceInt).getName() + "(≧◡≦) ♡ That was so coooool !");
                         heroList.remove(heroList.get(choiceInt));
                         for(int i = 0; i < heroList.size() ; i++) {
                             System.out.println(i + " - " + heroList.get(i).getName());
                         }
                     } else {
-                        System.out.println("Please choose a valid hero");
+                        System.out.println("Please choose a valid hero... Come ooon I'm sure you can do this ! here a motivation kiss (っ˘з(˘⌣˘ ) ♡ ");
                     }
                 } catch (InputMismatchException e) {
                     System.out.println("Please enter a valid option");
                     sc.next();
                 }
                 try {
-                    System.out.println("Do you want to delete an other Hero ? (y / n )");
+                    System.out.println("Do you want to delete an other Hero ? (y / n ) (°◡°♡) Yaaaay please");
                     choiceStr = sc.next();
                 }
                 catch (InputMismatchException e){
-                    System.out.println("Please enter a valid option");
+                    System.out.println("Please enter a valid option...  Come ooon I'm sure you can do this ! here a motivation kiss (っ˘з(˘⌣˘ ) ♡");
                     sc.next();
                 }
                 if (choiceStr.equals(("n"))){
@@ -287,7 +306,7 @@ public class choiceFunctions {
             }
         }
         else{
-            System.out.println("The fight Historical is empty... Please start a fight");
+            System.out.println("The fight Historical is empty... Please start a fight.. I know you can do it ! Here a motivation kiss ❤ (ɔˆз(ˆ⌣ˆc)");
         }
         System.out.println("");
     }
@@ -384,6 +403,11 @@ public class choiceFunctions {
                 }
         }
         System.out.println("You have imported " + nbHero + " heroes !" );
+        if (nbHero > 10){
+            System.out.println("(；⌣̀_⌣́) You imported to much for my poor memory... ");
+            System.out.println("Its not because you can create as many heroes as you want that you CAN do it without thinking !!!!");
+        }
+
         return heroList;
     }
 }

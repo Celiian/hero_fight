@@ -22,7 +22,16 @@ public class GameFunctions {
         if (hero2Hp < 0){
             hero2Hp = 0;
         }
-        System.out.println(hero_atk.getName() + " did " + dmg_taken + " to " + hero_def.getName() + " !");
+        if (dmg_taken > 20){
+            System.out.println("OH MY GOD !!! " + hero_def.getName() + " took " + dmg_taken + " damage from " + hero_atk.getName() + " !!!! Can you imagine that ???");
+        }
+        else {
+            System.out.println(hero_atk.getName() + " did " + dmg_taken + " to " + hero_def.getName() + " !");
+        }
+        if (hero2Hp < 30){
+            System.out.println(hero_def.getName() + " have " + hero2Hp + " he is so clooose to die !!!");
+        }
+
         System.out.println("Now " +  hero_def.getName() + " have " + hero2Hp + " hp left \n");
 
         return hero2Hp;
